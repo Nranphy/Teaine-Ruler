@@ -1,0 +1,43 @@
+{
+	"name": "Teaine-Workplace",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"postCreateCommand": "pip install poetry; poetry config virtualenvs.in-project true; poetry install;",
+	"forwardPorts": [
+		5432,
+		6333,
+		6334
+	],
+	// "features": {},
+	// "remoteUser": "root",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"cweijan.vscode-postgresql-client2",
+				"eeyore.yapf",
+				"ms-python.python",
+				"ms-azuretools.vscode-docker",
+				"vivaxy.vscode-conventional-commits"
+			],
+			"settings": {
+				// 注意：关闭自动保存
+				"files.autoSave": "off",
+				// 外观
+				"workbench.colorTheme": "Default Dark Modern",
+				"editor.fontSize": 14,
+				// Python formatter 配置项
+				"[python]": {
+					"editor.formatOnSaveMode": "file",
+					"editor.formatOnSave": true,
+					"editor.defaultFormatter": "eeyore.yapf",
+					"editor.formatOnType": false
+				},
+				"yapf.args": [
+					"--style",
+					"{based_on_style: facebook}"
+				]
+			}
+		}
+	}
+}
