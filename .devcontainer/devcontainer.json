@@ -36,7 +36,7 @@
 				"python.analysis.typeCheckingMode": "basic",
 				"yapf.args": [
 					"--style",
-					"{based_on_style: facebook, BLANK_LINE_BEFORE_NESTED_CLASS_OR_DEF: true}"
+					"{based_on_style: facebook, BLANK_LINE_BEFORE_NESTED_CLASS_OR_DEF: true, COLUMN_LIMIT: 120}"
 				]
 			}
 		}
