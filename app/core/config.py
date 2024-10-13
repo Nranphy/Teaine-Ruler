@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(
         json_file=Path(__file__).parent.parent / 'setting.json',
-        json_file_encoding='UTF-8-sig',
+        json_file_encoding='utf-8-sig',
     )
 
     @model_validator(mode='after')
