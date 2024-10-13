@@ -51,7 +51,9 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings(*args, **kwargs) -> Settings:
     """构建配置实例，可自定义参数，所构建实例与全局配置实例不为同一对象"""
-    return Settings(*args, **kwargs)
+    settings = Settings(*args, **kwargs)
+    logger.debug("新生成配置实例内容如下：" + settings.model_dump_json())
+    return settings
 
 
 def refresh_settings() -> Settings:
