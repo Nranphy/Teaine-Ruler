@@ -48,6 +48,8 @@ class BasePromptManager:
             logger.debug('当前无 base prompt 内容。')
 
     def get(self, name: str, params: dict[str, str], refresh: bool = False) -> BasePrompt:
+        if self.base_prompt_data_dir is None:
+            raise FileNotFoundError('base prompt 目录配置项为空。')
         if refresh:
             self.refresh()
         base_prompt = self.base_prompt_map.get(name)
@@ -63,6 +65,8 @@ class BasePromptManager:
         self.refresh()
 
     def get_all(self, params: dict[str, str], refresh: bool = False) -> list[BasePrompt]:
+        if self.base_prompt_data_dir is None:
+            raise FileNotFoundError('base prompt 目录配置项为空。')
         if refresh:
             self.refresh()
         return [self.get(name, params) for name in self.base_prompt_map.keys()]
