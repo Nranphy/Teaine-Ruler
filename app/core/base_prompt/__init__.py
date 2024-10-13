@@ -1,4 +1,5 @@
 from pydantic import DirectoryPath
+import re
 
 from app.models.base_prompt import BasePrompt
 from app.core.config import settings
@@ -30,9 +31,21 @@ class BasePromptManager:
         for file_name in self.base_prompt_data_dir.iterdir():
             if not file_name.name.endswith('.txt'):
                 continue
-            self.base_prompt_map[file_name.name.removesuffix('.txt')] = file_name.read_text(encoding='utf-8-sig')
+            self.base_prompt_map[file_name.name.removesuffix('.txt')] = \
+                file_name.read_text(encoding='utf-8-sig').strip()
 
         logger.success("base prompt 更新成功。")
+        if len(self.base_prompt_map) > 0:
+            logger.debug(
+                "当前 base prompt 内容概述如下：" + '[' + (
+                    ', '.join(
+                        f'<名称:{name}, 文本长:{len(text)}, 参数量:{len(re.findall(r"{{{[A-Za-z]+?}}}", text))}>'
+                        for name, text in self.base_prompt_map.items()
+                    )
+                ) + '].'
+            )
+        else:
+            logger.debug('当前无 base prompt 内容。')
 
     def get(self, name: str, params: dict[str, str], refresh: bool = False) -> BasePrompt:
         if refresh:
