@@ -10,6 +10,7 @@ python = "^3.12"
 uvicorn = {extras = ["standard"], version = "^0.31.1"}
 fastapi = {extras = ["standard"], version = "^0.115.0"}
 sqlmodel = "^0.0.22"
+pydantic-settings = "^2.5.2"
 
 
 [build-system]
