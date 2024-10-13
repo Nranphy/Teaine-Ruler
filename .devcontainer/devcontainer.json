@@ -33,6 +33,7 @@
 					"editor.defaultFormatter": "eeyore.yapf",
 					"editor.formatOnType": false
 				},
+				"python.analysis.typeCheckingMode": "basic",
 				"yapf.args": [
 					"--style",
 					"{based_on_style: facebook}"
