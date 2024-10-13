@@ -1,3 +1,4 @@
+from pydantic import DirectoryPath, model_validator
 from pydantic_settings import (
     BaseSettings,
     SettingsConfigDict,
@@ -7,14 +8,28 @@ from pydantic_settings import (
 from functools import lru_cache
 from pathlib import Path
 
+from app.utils.log import logger
+
 
 class Settings(BaseSettings):
     """全局配置类"""
 
+    data_dir: DirectoryPath = Path(__file__).parent.parent / 'data'
+    """数据目录"""
+
+    base_prompt_data_dir: DirectoryPath | None = None
+    """base prompt 数据目录"""
+
     model_config = SettingsConfigDict(
         json_file=Path(__file__).parent.parent / 'setting.json',
-        json_file_encoding='UTF-8-sig'
+        json_file_encoding='UTF-8-sig',
     )
+
+    @model_validator(mode='after')
+    def data_dir_validator(self):
+        if self.base_prompt_data_dir is None and (self.data_dir / 'base_prompt').is_dir():
+            self.base_prompt_data_dir = self.data_dir / 'base_prompt'
+        return self
 
     @classmethod
     def settings_customise_sources(
@@ -43,10 +58,11 @@ def refresh_settings() -> Settings:
     """刷新全局配置实例，这将重新读取配置文件"""
     global settings
     settings = get_settings()
+    logger.debug("全局配置实例刷新完成。")
     return settings
 
 
-settings = get_settings()
+settings: Settings = get_settings()
 """全局配置实例"""
 
 __all__ = [
