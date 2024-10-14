@@ -1,7 +1,11 @@
 from pydantic import DirectoryPath
 import re
 
-from app.models.base_prompt import BasePrompt
+from app.models.base_prompt import (
+    BasePrompt,
+    BasePromptInfo,
+    BasePromptManagerStatus,
+)
 from app.core.config import settings
 from app.utils.log import logger
 
@@ -35,17 +39,27 @@ class BasePromptManager:
                 file_name.read_text(encoding='utf-8-sig').strip()
 
         logger.success("base prompt 更新成功。")
-        if len(self.base_prompt_map) > 0:
-            logger.debug(
-                "当前 base prompt 内容概述如下：" + '[' + (
-                    ', '.join(
-                        f'<名称:{name}, 文本长:{len(text)}, 参数量:{len(re.findall(r"{{{[A-Za-z]+?}}}", text))}>'
-                        for name, text in self.base_prompt_map.items()
-                    )
-                ) + '].'
-            )
+
+        status = self.status()
+        if status.is_available:
+            if len(status.base_prompt_info) > 0:
+                logger.debug("当前 base prompt 内容概述如下：" + '[' + (', '.join(map(str, status.base_prompt_info))) + '].')
         else:
-            logger.debug('当前无 base prompt 内容。')
+            logger.debug('当前 base prompt 不可用。')
+
+    def status(self, refresh: bool = False) -> BasePromptManagerStatus:
+        if refresh:
+            self.refresh()
+        return BasePromptManagerStatus(
+            is_available=self.base_prompt_data_dir is not None,
+            base_prompt_info=[
+                BasePromptInfo(
+                    name=name,
+                    length=len(text),
+                    param_num=len(re.findall(r"{{{[A-Za-z]+?}}}", text)),
+                ) for name, text in self.base_prompt_map.items()
+            ]
+        )
 
     def get(self, name: str, params: dict[str, str], refresh: bool = False) -> BasePrompt:
         if self.base_prompt_data_dir is None:

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, model_validator, Field
 
 from app.utils.log import logger
 
@@ -12,7 +12,7 @@ class BasePrompt(BaseModel):
     text: str
     """base prompt 内容"""
 
-    params: dict[str, str]
+    params: dict[str, str] = Field(default_factory=dict)
     """
     base prompt 参数表
     
@@ -30,6 +30,49 @@ class BasePrompt(BaseModel):
         return self
 
 
+class BasePromptCreate(BaseModel):
+    """base prompt 创建模型"""
+
+    name: str
+    """base prompt 名称"""
+
+    text: str
+    """base prompt 内容"""
+
+
+class BasePromptInfo(BaseModel):
+    """base prompt 基础情况"""
+
+    name: str
+    """base prompt 名称"""
+
+    length: int
+    """base prompt 长度"""
+
+    param_num: int
+    """base prompt 参数位个数"""
+
+    def __str__(self) -> str:
+        return ('<'
+                f'名称: {self.name}, '
+                f'长度: {self.length}, '
+                f'参数数: {self.param_num}'
+                '>')
+
+
+class BasePromptManagerStatus(BaseModel):
+    """base prompt 管理器状态模型"""
+
+    is_available: bool
+    """当前是否可用"""
+
+    base_prompt_info: list[BasePromptInfo]
+    """base prompt 基础信息"""
+
+
 __all__ = [
     "BasePrompt",
+    "BasePromptInfo",
+    "BasePromptCreate",
+    "BasePromptManagerStatus",
 ]
