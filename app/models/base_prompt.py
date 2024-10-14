@@ -55,6 +55,18 @@ class BasePromptGet(BaseModel):
     """
 
 
+class BasePromptGetAll(BaseModel):
+    """base prompt 请求所有模型"""
+
+    params: dict[str, str] = Field(default_factory=dict)
+    """
+    base prompt 参数表
+    
+    参数名与 base prompt 中的参数相对应，不需要加入参数标记；
+    base prompt 将在实例化时自动完成渲染。
+    """
+
+
 class BasePromptInfo(BaseModel):
     """base prompt 基础情况"""
 
