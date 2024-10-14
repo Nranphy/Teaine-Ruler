@@ -61,7 +61,7 @@ class BasePromptManager:
             ]
         )
 
-    def get(self, name: str, params: dict[str, str], refresh: bool = False) -> BasePrompt:
+    def get(self, name: str, params: dict[str, str] = dict(), refresh: bool = False) -> BasePrompt:
         if self.base_prompt_data_dir is None:
             raise FileNotFoundError('base prompt 目录配置项为空。')
         if refresh:
