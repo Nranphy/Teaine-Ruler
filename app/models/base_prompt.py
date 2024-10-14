@@ -30,7 +30,7 @@ class BasePrompt(BaseModel):
         return self
 
 
-class BasePromptCreate(BaseModel):
+class BasePromptAdd(BaseModel):
     """base prompt 创建模型"""
 
     name: str
@@ -99,9 +99,9 @@ class BasePromptManagerStatus(BaseModel):
 
 __all__ = [
     "BasePrompt",
+    "BasePromptAdd",
     "BasePromptGet",
     "BasePromptGetAll",
     "BasePromptInfo",
-    "BasePromptCreate",
     "BasePromptManagerStatus",
 ]
