@@ -75,6 +75,8 @@ class BasePromptManager:
         if self.base_prompt_data_dir is None:
             raise FileNotFoundError('base prompt 目录配置项为空。')
         file_path = self.base_prompt_data_dir / f'{name}.txt'
+        if file_path.exists():
+            raise ValueError('该名称的 base prompt 已存在。')
         file_path.write_text(text, encoding='utf-8-sig')
         self.refresh()
 
