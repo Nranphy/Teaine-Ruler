@@ -40,6 +40,21 @@ class BasePromptCreate(BaseModel):
     """base prompt 内容"""
 
 
+class BasePromptGet(BaseModel):
+    """base prompt 请求模型"""
+
+    name: str
+    """base prompt 名称"""
+
+    params: dict[str, str] = Field(default_factory=dict)
+    """
+    base prompt 参数表
+    
+    参数名与 base prompt 中的参数相对应，不需要加入参数标记；
+    base prompt 将在实例化时自动完成渲染。
+    """
+
+
 class BasePromptInfo(BaseModel):
     """base prompt 基础情况"""
 
