@@ -99,6 +99,8 @@ class BasePromptManagerStatus(BaseModel):
 
 __all__ = [
     "BasePrompt",
+    "BasePromptGet",
+    "BasePromptGetAll",
     "BasePromptInfo",
     "BasePromptCreate",
     "BasePromptManagerStatus",
