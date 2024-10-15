@@ -64,3 +64,10 @@ class Premium_History(History_Base, table=True):
 
     duration_days: int = Field(default=0, nullable=False)
     """持续时长(天)"""
+
+
+__all__ = [
+    "Chat_History",
+    "Gift_History",
+    "Premium_History",
+]
