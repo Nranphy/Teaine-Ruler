@@ -72,7 +72,7 @@ class SceneSubType(StrEnum):
     '''
 
 
-class SceneInfo(SQLModel, table=True):
+class Scene_Info(SQLModel, table=True):
     """应用场景实例信息表模型"""
 
     id: int | None = Field(default=None, primary_key=True)
@@ -111,7 +111,7 @@ class SceneInfo(SQLModel, table=True):
     """应用场景结束时间"""
 
 
-class UserInfo(SQLModel, table=True):
+class User_Info(SQLModel, table=True):
     """多平台用户信息表模型"""
 
     id: int | None = Field(default=None, primary_key=True)
@@ -140,6 +140,6 @@ __all__ = [
     "Platform",
     "SceneType",
     "SceneSubType",
-    "SceneInfo",
-    "UserInfo",
+    "Scene_Info",
+    "User_Info",
 ]
