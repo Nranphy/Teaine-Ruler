@@ -76,7 +76,7 @@ class SceneInfo(SQLModel, table=True):
     """应用场景实例信息表模型"""
 
     id: int | None = Field(default=None, primary_key=True)
-    """唯一实例id标识"""
+    """唯一实例 id 标识"""
 
     scene_type: SceneType = Field(default=SceneType.test, sa_column=Column(Enum(SceneType), nullable=False))
     """应用场景类别"""
@@ -115,7 +115,7 @@ class UserInfo(SQLModel, table=True):
     """多平台用户信息表模型"""
 
     id: int | None = Field(default=None, primary_key=True)
-    """唯一用户标识"""
+    """唯一用户 id 标识"""
 
     main_id: int | None = Field(default=0, nullable=False)
     """用户主账号 id，用于跨平台用户识别，默认为 0"""
