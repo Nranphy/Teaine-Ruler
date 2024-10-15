@@ -1,4 +1,4 @@
-from pydantic import DirectoryPath, model_validator
+from pydantic import DirectoryPath, model_validator, PostgresDsn
 from pydantic_settings import (
     BaseSettings,
     SettingsConfigDict,
@@ -19,6 +19,13 @@ class Settings(BaseSettings):
 
     base_prompt_data_dir: DirectoryPath | None = None
     """base prompt 数据目录"""
+
+    db_url: PostgresDsn | None = None
+    """
+    PostgreSQL 的 URL 路径
+    
+    期望格式：postgresql://[name]:[password]@[host]:[post]/[database]
+    """
 
     model_config = SettingsConfigDict(
         json_file=Path(__file__).parent.parent / 'setting.json',
