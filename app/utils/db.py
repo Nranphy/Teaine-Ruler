@@ -1,7 +1,7 @@
 from sqlmodel import create_engine, SQLModel, Session
 from typing import Generator
 
-from app.core.config import settings
+from .config import settings
 from .log import logger
 
 
@@ -23,8 +23,9 @@ def init_db():
 
 
 if settings.db_url is None:
-    logger.warning("数据库 URL 配置项为空，。")
+    logger.warning("数据库 URL 配置项为空，未初始化 sqlmodel 引擎。")
     engine = None
+    """sqlmodel 引擎对象"""
 else:
     engine = create_engine(settings.db_url.unicode_string())
     """sqlmodel 引擎对象"""

@@ -8,7 +8,7 @@ from pydantic_settings import (
 from functools import lru_cache
 from pathlib import Path
 
-from app.utils.log import logger
+from .log import logger
 
 
 class Settings(BaseSettings):

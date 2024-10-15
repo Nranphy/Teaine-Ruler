@@ -6,7 +6,7 @@ from app.models.base_prompt import (
     BasePromptInfo,
     BasePromptManagerStatus,
 )
-from app.core.config import settings
+from app.utils.config import settings
 from app.utils.log import logger
 
 
