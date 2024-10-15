@@ -24,12 +24,18 @@ async def _():
 
 @router.post('/get', response_model=BasePrompt)
 async def _(model: BasePromptGet):
-    return base_prompt_manager.get(name=model.name, params=model.params)
+    try:
+        return base_prompt_manager.get(name=model.name, params=model.params)
+    except ValueError as e:
+        raise HTTPException(403, *e.args)
 
 
 @router.post('/get_all', response_model=list[BasePrompt])
 async def _(model: BasePromptGetAll):
-    return base_prompt_manager.get_all(params=model.params)
+    try:
+        return base_prompt_manager.get_all(params=model.params)
+    except ValueError as e:
+        raise HTTPException(403, *e.args)
 
 
 @router.post('/add', response_model=BasePromptManagerStatus)

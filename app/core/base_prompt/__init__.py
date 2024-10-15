@@ -63,7 +63,7 @@ class BasePromptManager:
 
     def get(self, name: str, params: dict[str, str] = dict(), refresh: bool = False) -> BasePrompt:
         if self.base_prompt_data_dir is None:
-            raise FileNotFoundError('base prompt 目录配置项为空。')
+            raise ValueError('base prompt 目录配置项为空。')
         if refresh:
             self.refresh()
         base_prompt = self.base_prompt_map.get(name)
@@ -73,7 +73,7 @@ class BasePromptManager:
 
     def add(self, name: str, text: str):
         if self.base_prompt_data_dir is None:
-            raise FileNotFoundError('base prompt 目录配置项为空。')
+            raise ValueError('base prompt 目录配置项为空。')
         file_path = self.base_prompt_data_dir / f'{name}.txt'
         if file_path.exists():
             raise ValueError('该名称的 base prompt 已存在。')
@@ -82,7 +82,7 @@ class BasePromptManager:
 
     def get_all(self, params: dict[str, str], refresh: bool = False) -> list[BasePrompt]:
         if self.base_prompt_data_dir is None:
-            raise FileNotFoundError('base prompt 目录配置项为空。')
+            raise ValueError('base prompt 目录配置项为空。')
         if refresh:
             self.refresh()
         return [self.get(name, params) for name in self.base_prompt_map.keys()]
