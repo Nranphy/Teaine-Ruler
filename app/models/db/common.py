@@ -81,7 +81,7 @@ class Scene_Info(SQLModel, table=True):
     scene_type: SceneType = Field(default=SceneType.test, sa_column=Column(Enum(SceneType), nullable=False))
     """应用场景类别"""
 
-    scene_sub_type: str = Field(nullable=False)
+    scene_sub_type: str = Field(default=SceneSubType.undefined, nullable=False)
     """
     应用场景子类别
 
