@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     base_prompt_data_dir: DirectoryPath | None = None
     """base prompt 数据目录"""
 
+    corpus_data_dir: DirectoryPath | None = None
+    """微调语料库数据目录"""
+
     db_url: PostgresDsn | None = None
     """
     PostgreSQL 的 URL 路径
@@ -36,6 +39,8 @@ class Settings(BaseSettings):
     def data_dir_validator(self):
         if self.base_prompt_data_dir is None and (self.data_dir / 'base_prompt').is_dir():
             self.base_prompt_data_dir = self.data_dir / 'base_prompt'
+        if self.corpus_data_dir is None and (self.data_dir / 'corpus').is_dir():
+            self.corpus_data_dir = self.data_dir / 'corpus'
         return self
 
     @classmethod
