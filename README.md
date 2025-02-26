@@ -14,3 +14,7 @@ The resource manager backend of Project Teaine.
 - [ ] 交互模型未考虑直播弹幕相互回复的场景。
 
 - [ ] 交互模型中的私参部分未进行标准化定义。
+
+### corpus 相关
+
+－ [ ] 语料数据集信息需要加上已有语料数量
