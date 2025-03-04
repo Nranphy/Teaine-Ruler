@@ -39,6 +39,13 @@
 					"{based_on_style: facebook, BLANK_LINE_BEFORE_NESTED_CLASS_OR_DEF: true, COLUMN_LIMIT: 120}"
 				]
 			}
+		},
+		"codespaces": {
+			"repositories": {
+				"Nranphy/Teaine-Common": {
+					"permissions": "write-all"
+				}
+			}
 		}
 	}
 }
