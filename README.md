@@ -1,5 +1,5 @@
 # Teaine-Ruler
-The resource manager backend of Project Teaine.
+茶因计划·资源管理器后端
 
 ## TODO:
 
@@ -17,4 +17,4 @@ The resource manager backend of Project Teaine.
 
 ### corpus 相关
 
-－ [ ] 语料数据集信息需要加上已有语料数量
+- [ ] 语料数据集信息需要加上已有语料数量
