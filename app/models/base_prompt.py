@@ -1,6 +1,5 @@
 from pydantic import BaseModel, model_validator, Field
-
-from app.utils.log import logger
+import re
 
 
 class BasePrompt(BaseModel):
@@ -23,10 +22,13 @@ class BasePrompt(BaseModel):
     @model_validator(mode="after")
     def params_render(self):
         """base prompt 自动渲染"""
-        for k, v in self.params.items():
-            if v.startswith('{{{') or v.endswith('}}}'):
-                logger.warning('base prompt 渲染参数值以{{{和}}}开头或结尾，可能导致渲染结果错误。')
-            self.text = self.text.replace('{{{' + k + '}}}', v)
+        patterns = sorted(
+            (re.escape(k) for k in self.params.keys()),
+            key=len,
+            reverse=True,
+        )
+        regex = re.compile(r'\{\{\{(' + '|'.join(patterns) + r')\}\}\}')
+        self.text = regex.sub(lambda match: str(self.params[match.group(1)]), self.text)
         return self
 
 
