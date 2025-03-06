@@ -14,8 +14,9 @@ KNOWLEDGE_KEYS = Literal[
 知识文本块命名键
 
 user_description: 用户的简单描述文本;
-datetime_info: 当前日期和时间信息;
-background_info: 设定集背景信息;
+datetime_info: 当前日期和时间信息文本;
+background_info: 设定集背景信息文本;
+other: 其他未归类知识内容
 """
 
 
