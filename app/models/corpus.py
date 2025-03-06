@@ -1,15 +1,32 @@
 from pydantic import BaseModel, Field, model_validator
 from typing import Literal
 
+ROLE_TYPE = Literal['system', 'user', 'assistant']
+"""角色类型字面量"""
+
+KNOWLEDGE_KEYS = Literal[
+    'user_description',
+    'datetime_info',
+    'background_info',
+    'other',
+]
+"""
+知识文本块命名键
+
+user_description: 用户的简单描述文本;
+datetime_info: 当前日期和时间信息;
+background_info: 设定集背景信息;
+"""
+
 
 class Role(BaseModel):
     """角色信息模型"""
 
-    role_type: Literal['system', 'user', 'assistant']
+    role_type: ROLE_TYPE
     """
     角色类型
     
-    与角色名称无关，即使是多角色或多用户也应该规定在三个角色类别中
+    与角色名称无关，即使是多角色或多用户也应该规定在类别中
     """
 
     name: str | None = None
@@ -32,11 +49,11 @@ class Message(BaseModel):
     content: str
     """消息文本内容"""
 
-    knowledge: dict[str, str] = Field(default_factory=dict)
+    knowledge: dict[KNOWLEDGE_KEYS, str] = Field(default_factory=dict)
     """
     消息知识文本内容
 
-    键为知识文本块的命名，值为知识内容
+    键为知识文本块的命名键，值为知识内容
     """
 
     @model_validator(mode="after")
@@ -99,6 +116,8 @@ class DatasetInfo(BaseModel):
 
 
 __all__ = [
+    "ROLE_TYPE",
+    "KNOWLEDGE_KEYS",
     "Role",
     "Message",
     "Corpus",
