@@ -1,7 +1,7 @@
 from pydantic import DirectoryPath
 import re
 
-from app.models.base_prompt import (
+from app.common.models.base_prompt import (
     BasePrompt,
     BasePromptInfo,
     BasePromptManagerStatus,

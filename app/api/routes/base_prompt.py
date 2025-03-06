@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 
-from app.models.base_prompt import (
+from app.common.models.base_prompt import (
     BasePromptManagerStatus,
     BasePromptGetAll,
     BasePromptGet,

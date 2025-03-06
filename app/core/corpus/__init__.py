@@ -7,7 +7,7 @@ import json
 
 from app.utils.config import settings
 from app.utils.log import logger
-from app.models.corpus import *
+from app.common.models.corpus import *
 
 DATASET_INFO_FILENAME = 'INFO.json'
 """语料数据集信息文件"""
