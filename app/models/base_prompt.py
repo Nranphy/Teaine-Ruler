@@ -9,7 +9,11 @@ class BasePrompt(BaseModel):
     """base prompt 名称"""
 
     text: str
-    """base prompt 内容"""
+    """
+    base prompt 文本内容
+    
+    如果传入 params 参数，则为渲染后的 base prompt 文本
+    """
 
     params: dict[str, str] = Field(default_factory=dict)
     """
