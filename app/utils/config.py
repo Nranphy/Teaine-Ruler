@@ -37,9 +37,13 @@ class Settings(BaseSettings):
 
     @model_validator(mode='after')
     def data_dir_validator(self):
-        if self.base_prompt_data_dir is None and (self.data_dir / 'base_prompt').is_dir():
+        if self.base_prompt_data_dir is None and (
+            (self.data_dir / 'base_prompt').is_dir() or not (self.data_dir / 'base_prompt').exists()
+        ):
             self.base_prompt_data_dir = self.data_dir / 'base_prompt'
-        if self.corpus_data_dir is None and (self.data_dir / 'corpus').is_dir():
+        if self.corpus_data_dir is None and (
+            (self.data_dir / 'corpus').is_dir() or not (self.data_dir / 'corpus').exists()
+        ):
             self.corpus_data_dir = self.data_dir / 'corpus'
         return self
 
