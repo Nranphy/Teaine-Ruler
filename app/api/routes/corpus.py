@@ -22,6 +22,14 @@ async def _(dataset_name: str):
         raise HTTPException(403, *e.args)
 
 
+@router.post('/create', response_model=DatasetInfo)
+async def _(model: DatasetInfo):
+    try:
+        return corpus_dataset_manager.create(model.name, model.description, model.bucket_num)
+    except ValueError as e:
+        raise HTTPException(403, *e.args)
+
+
 @router.post('/add', response_model=DatasetInfo)
 async def _(model: CorpusAdd):
     try:
