@@ -4,28 +4,9 @@ from sqlalchemy.dialects.postgresql import TEXT, JSONB, BIGINT
 from sqlmodel import SQLModel, Field
 from datetime import datetime
 from typing import Annotated
-from enum import StrEnum
 
-from .common import JSONValue
-
-
-class InteractionType(StrEnum):
-    """交互行为类型枚举"""
-
-    live_chat = 'live_chat'
-    """直播普通弹幕"""
-
-    live_super_chat = 'live_super_chat'
-    """直播醒目留言"""
-
-    live_gift = 'live_gift'
-    """直播礼物"""
-
-    live_premium = 'live_premium'
-    """直播付费订阅"""
-
-    unknown = 'unknown'
-    """未知"""
+from app.common.models.db.typing import JSONValue
+from app.common.models.db.enums import InteractionType
 
 
 class Interaction(SQLModel, table=True):
@@ -88,6 +69,5 @@ class Interaction(SQLModel, table=True):
 
 
 __all__ = [
-    "InteractionType",
     "Interaction",
 ]

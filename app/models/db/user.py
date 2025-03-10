@@ -2,11 +2,11 @@
 
 from sqlalchemy.dialects.postgresql import TEXT, JSONB, BIGINT
 from sqlmodel import SQLModel, Field
-from pydantic import BaseModel
 from datetime import datetime
 from typing import Annotated
 
-from .common import Platform, JSONValue
+from app.common.models.db.typing import JSONValue
+from app.common.models.db.enums import Platform
 
 
 class User_Info(SQLModel, table=True):
@@ -72,19 +72,6 @@ class User_Info(SQLModel, table=True):
         return datetime.fromtimestamp(self.register_timestamp / 1000)
 
 
-class BilibiliUserFields(BaseModel):
-    """
-    Bilibili 用户信息字段解析模型
-    """
-
-    level: int = 0
-    """主站等级"""
-
-    live_level: int = 0
-    """直播观众等级"""
-
-
 __all__ = [
     "User_Info",
-    "BilibiliUserFields",
 ]
