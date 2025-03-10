@@ -41,10 +41,14 @@ class Settings(BaseSettings):
             (self.data_dir / 'base_prompt').is_dir() or not (self.data_dir / 'base_prompt').exists()
         ):
             self.base_prompt_data_dir = self.data_dir / 'base_prompt'
+        if self.base_prompt_data_dir is not None:
+            self.base_prompt_data_dir.mkdir(parents=True, exist_ok=True)
         if self.corpus_data_dir is None and (
             (self.data_dir / 'corpus').is_dir() or not (self.data_dir / 'corpus').exists()
         ):
             self.corpus_data_dir = self.data_dir / 'corpus'
+        if self.corpus_data_dir is not None:
+            self.corpus_data_dir.mkdir(parents=True, exist_ok=True)
         return self
 
     @classmethod
