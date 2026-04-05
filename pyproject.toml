@@ -1,21 +1,18 @@
-[tool.poetry]
+[project]
 name = "teaine-ruler"
 version = "0.1.0"
 description = "The resource manager backend of Project Teaine."
-authors = ["Nranphy <Nranphy@outlook.com>"]
+authors = [
+    { name = "Nranphy", email = "Nranphy@outlook.com" }
+]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.12"
-uvicorn = {extras = ["standard"], version = "^0.31.1"}
-fastapi = {extras = ["standard"], version = "^0.115.0"}
-sqlmodel = "^0.0.22"
-pydantic-settings = "^2.5.2"
-loguru = "^0.7.2"
-psycopg2 = "^2.9.9"
-aiofiles = "^24.1.0"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">=3.12"
+dependencies = [
+    "uvicorn[standard]>=0.31.1,<0.32.0",
+    "fastapi[standard]>=0.115.0,<0.116.0",
+    "sqlmodel>=0.0.22,<0.0.23",
+    "pydantic-settings>=2.5.2,<3.0.0",
+    "loguru>=0.7.2,<0.8.0",
+    "psycopg2>=2.9.9,<3.0.0",
+    "aiofiles>=24.1.0,<25.0.0",
+]
